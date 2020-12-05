@@ -1,5 +1,5 @@
-
 const containerDOM = document.querySelector('.container');
+
 const searchForm = document.querySelector('.get-location');
 const cityValue = document.querySelector('.get-location input')
 
@@ -8,6 +8,14 @@ const currLoc = document.querySelector('.weather .location')
 const currCon = document.querySelector('.weather .condition')
 const currIcon = document.querySelector('.weather .fas')
 const condSugg = document.querySelector('.conditionSugg')
+
+const detailsTempHL = document.querySelector('.details #tempHL')
+const detailsFeelsLike = document.querySelector('.details #feelsLike')
+const detailsChance = document.querySelector('.details #chance')
+const detailsWindSpeed = document.querySelector('.details #windSpeed')
+
+
+
 
 const toCelcius = (kelvin) => {
     celcius = Math.round(kelvin - 273.15);
@@ -27,11 +35,19 @@ const conditionSugg = {
 }
 
 const postCurrWeather=(data)=>{
+	//Current Weather
 	currTemp.textContent = `${toCelcius(data.main.temp)}°C`
 	currLoc.textContent = `${data.name}, ${data.sys.country}`
 	currCon.textContent = `${data.weather[0].description}`
 	currIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 	//condSugg.textContent = getConSugg(data.weather[0].icon)
+	
+	//Current Weather DetailsChance
+	detailsTempHL.textContent = `↑${toCelcius(data.main.temp_max)}°   ↓${toCelcius(data.main.temp_min)}°`
+	detailsFeelsLike.textContent = `${toCelcius(data.main.feels_like)}°`
+	//detailsChance
+	detailsWindSpeed.textContent = `${Math.floor(data.wind.speed*3.6)} km/h`
+	
 }
 
 
